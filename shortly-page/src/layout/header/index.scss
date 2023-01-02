@@ -1,0 +1,60 @@
+@import "../../assets/sass/utils/_variables.scss";
+@import "../../assets/sass/utils/_extend.scss";
+@import "../../assets/sass/utils/_mixins.scss";
+
+#header {
+  .container {
+    header {
+      @include flex(space-between);
+      padding: 25px 0;
+      .logo-nav {
+        @include flex();
+        column-gap: 45px;
+        .logo {
+          img {
+            width: 120px;
+            height: 30px;
+          }
+        }
+        nav {
+          ul {
+            display: flex;
+            column-gap: 30px;
+
+            li {
+              list-style: none;
+              a {
+                text-decoration: none;
+                color: $text-color;
+                font-weight: 700;
+                font-size: 15px;
+                &:hover {
+                  color: $first-color;
+                }
+              }
+            }
+          }
+        }
+      }
+      .btns {
+        display: flex;
+        column-gap: 30px;
+        .login-btn {
+          border: 0;
+          outline: 0;
+          border-radius: 28px;
+          font-weight: 700;
+          font-size: 15px;
+          padding: 10px 20px;
+          cursor: pointer;
+          color: $text-color;
+          background: #ffffff;
+        }
+        .signup-btn {
+          @extend %primary-btn;
+          padding: 10px 20px;
+        }
+      }
+    }
+  }
+}

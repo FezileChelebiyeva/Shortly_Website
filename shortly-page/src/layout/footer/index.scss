@@ -1,0 +1,61 @@
+@import "../../assets/sass/utils/_variables.scss";
+@import "../../assets/sass/utils/_extend.scss";
+@import "../../assets/sass/utils/_mixins.scss";
+
+#footer {
+  background-color: #232127;
+  padding: 70px 0;
+  .container {
+    .footer {
+      @include flex(space-between, start);
+      .logo {
+        img {
+          width: 120px;
+          height: 33px;
+        }
+      }
+      .div {
+        display: flex;
+        column-gap: 100px;
+        .nav {
+          color: white;
+          display: flex;
+          column-gap: 75px;
+          nav {
+            h5 {
+              margin-bottom: 25px;
+              font-weight: 700;
+              font-size: 16px;
+            }
+            ul {
+              li {
+                list-style: none;
+                margin-top: 10px;
+                a {
+                  font-weight: 500;
+                  font-size: 15px;
+                  text-decoration: none;
+                  color: #bfbfbf;
+                  &:hover {
+                    color: #2bd0d0;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .icons {
+          .fa-brands {
+            color: #ffffff;
+            font-size: 25px;
+            margin: 0 20px;
+            cursor: pointer;
+            &:hover {
+              color: #2bd0d0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

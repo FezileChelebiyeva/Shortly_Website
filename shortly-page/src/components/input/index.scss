@@ -1,0 +1,27 @@
+@import "../../assets/sass/utils/_variables.scss";
+@import "../../assets/sass/utils/_extend.scss";
+@import "../../assets/sass/utils/_mixins.scss";
+
+#shortten-link {
+  @include flex();
+  column-gap: 25px;
+  .input-control {
+    @include flex();
+    border-radius: 10px;
+    column-gap: 25px;
+    padding: 50px 65px;
+    background-color: $primary-color;
+    input {
+      width: 700px;
+      border-radius: 10px;
+      padding: 15px 25px;
+      border: 0;
+      outline: 0;
+    }
+    button {
+      @extend %primary-btn;
+      border-radius: 10px;
+      padding: 15px 20px;
+    }
+  }
+}

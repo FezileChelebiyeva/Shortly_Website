@@ -1,0 +1,135 @@
+@import "../../assets/sass/utils/_variables.scss";
+@import "../../assets/sass/utils/_extend.scss";
+@import "../../assets/sass/utils/_mixins.scss";
+
+#home-page {
+  // position: relative;
+  .container {
+    .about-text {
+      padding: 100px 0;
+      display: flex;
+      .text {
+        width: 560px;
+        h1 {
+          font-weight: 700;
+          font-size: 75px;
+          color: $first-color;
+        }
+        p {
+          margin-top: 5px;
+          color: $text-color;
+          font-weight: 500;
+          font-size: 22px;
+        }
+        button {
+          margin-top: 35px;
+          @extend %primary-btn;
+          padding: 15px 40px;
+          font-size: 20px;
+        }
+      }
+      .img {
+        img {
+          width: 653px;
+          height: 399px;
+          position: absolute;
+          // right: 0;
+        }
+      }
+    }
+  }
+  #advanced-statistics {
+    background-color: $bg-color;
+    margin-top: -75px;
+    // height: 100vh;
+    .container {
+      .advanced-statistics {
+        padding: 150px 0;
+        position: relative;
+        .head {
+          text-align: center;
+          // padding-top: 100px;
+          margin-bottom: 100px;
+          h1 {
+            font-weight: 700;
+            font-size: 40px;
+            color: $first-color;
+          }
+          p {
+            display: inline-block;
+            margin-top: 15px;
+            width: 540px;
+            font-weight: 500;
+            font-size: 18px;
+            color: $text-color;
+          }
+        }
+        .line {
+          width: 100%;
+          height: 8px;
+          background-color: $btn-color;
+          position: absolute;
+          top: 570px;
+        }
+        .boxes {
+          display: flex;
+          column-gap: 30px;
+          position: relative;
+
+          .card {
+            background-color: #fff;
+            padding: 0 32px;
+            // padding-bottom: 50px;
+            border-radius: 5px;
+            .circle {
+              @include flex();
+              width: 90px;
+              height: 90px;
+              border-radius: 50%;
+              background-color: $primary-color;
+              margin-top: -30px;
+            }
+            h1 {
+              margin-top: 30px;
+              color: $first-color;
+              font-weight: 700;
+              font-size: 22px;
+            }
+            p {
+              margin-top: 30px;
+              color: $text-color;
+              font-weight: 500;
+              font-size: 15px;
+            }
+          }
+          & div:nth-child(2) {
+            margin-top: 44px;
+          }
+          & div:nth-child(3) {
+            margin-top: 88px;
+          }
+        }
+      }
+    }
+  }
+  #your-links {
+    background-color: $primary-color;
+    padding: 60px 0;
+    .container {
+      div {
+        text-align: center;
+        color: #fff;
+        h1 {
+          font-weight: 700;
+          font-size: 40px;
+        }
+        button {
+          margin-top: 35px;
+          @extend %primary-btn;
+          padding: 15px 40px;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
