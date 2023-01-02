@@ -2,6 +2,8 @@ import React from "react";
 import "./index.scss";
 import compImg from "../../assets/images/working_with_computer.png";
 import icon from "../../assets/images/icon.png";
+import icon2 from "../../assets/images/icon-brand.svg";
+import icon3 from "../../assets/images/icon-detailed.svg";
 import Input from "../../components/input";
 const HomePage = () => {
   return (
@@ -36,7 +38,7 @@ const HomePage = () => {
             <div className="boxes">
               <div className="card">
                 <div className="circle">
-                  <img src={icon} alt="" />
+                  <img src={icon2} alt="" />
                 </div>
                 <h1>Brand Recognition</h1>
                 <p>
@@ -47,7 +49,7 @@ const HomePage = () => {
               </div>
               <div className="card">
                 <div className="circle">
-                  <img src={icon} alt="" />
+                  <img src={icon3} alt="" />
                 </div>
                 <h1>Detailed Records</h1>
                 <p>

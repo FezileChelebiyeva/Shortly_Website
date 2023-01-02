@@ -2,26 +2,65 @@
 @import "../../assets/sass/utils/_extend.scss";
 @import "../../assets/sass/utils/_mixins.scss";
 
-#shortten-link {
-  @include flex();
-  column-gap: 25px;
-  .input-control {
-    @include flex();
-    border-radius: 10px;
-    column-gap: 25px;
-    padding: 50px 65px;
-    background-color: $primary-color;
-    input {
-      width: 700px;
-      border-radius: 10px;
-      padding: 15px 25px;
-      border: 0;
-      outline: 0;
+#shorten-link {
+  .container {
+    .input_btn {
+      @include flex();
+      // position: relative;
+      column-gap: 25px;
+      .input-control {
+        // position: absolute;
+        // top: 1px;
+        @include flex();
+        border-radius: 10px;
+        column-gap: 25px;
+        padding: 50px 65px;
+        background-color: $primary-color;
+        input {
+          width: 700px;
+          border-radius: 10px;
+          padding: 15px 25px;
+          border: 0;
+          outline: 0;
+        }
+        button {
+          @extend %primary-btn;
+          border-radius: 10px;
+          padding: 15px 20px;
+        }
+      }
     }
-    button {
-      @extend %primary-btn;
-      border-radius: 10px;
-      padding: 15px 20px;
+  }
+  .link-list {
+    background-color: $bg-color;
+    ul {
+      // padding-left: 130px;
+      // padding-right: 130px;
+      li {
+        @include flex();
+        list-style: none;
+        color: $first-color;
+        font-weight: 500;
+        font-size: 20px;
+        padding: 0 120px;
+        div {
+          border-radius: 5px;
+          width: 980px;
+          margin-top: 15px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          // width: 100%;
+          padding: 18px 32px;
+          background-color: #ffffff;
+          z-index: 4;
+          button {
+            @extend %primary-btn;
+            padding: 10px 30px;
+            border-radius: 5px;
+          }
+        }
+      }
     }
   }
 }
