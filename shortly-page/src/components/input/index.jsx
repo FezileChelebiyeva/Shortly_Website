@@ -13,7 +13,7 @@ const reducer = (state, action) => {
     //     inputValue: "",
     //   };
     // }
-    case "FETCH_SUCCESS": {
+    case "FETCH_SUCCESS":
       return {
         ...state,
         // links: action.payload,
@@ -21,14 +21,25 @@ const reducer = (state, action) => {
         links: [...state.links, action.payload],
         inputValue: "",
       };
-    }
+
+    case "UPDATE_INDEX":
+      console.log(action);
+      return {
+        ...state,
+        index: action.payload
+      };
+
     default:
       return state;
   }
 };
 const Input = () => {
-  const [state, dispatch] = useReducer(reducer, { links: [], inputValue: "" });
-  const [status, setStatus] = useState(true);
+  const [state, dispatch] = useReducer(reducer, {
+    links: [],
+    inputValue: "",
+    index: null,
+  });
+  // const [index, setIndex] = useState(null);
   const [errorStatus, setErrorStatus] = useState(true);
 
   const handleShorten = async () => {
@@ -37,7 +48,11 @@ const Input = () => {
     );
     dispatch({ type: "FETCH_SUCCESS", payload: resp.data.result });
   };
-
+  const handleCopy = (el, i) => {
+    // setIndex(i);
+    dispatch({ type: "UPDATE_INDEX", payload: i });
+    navigator.clipboard.writeText(el.short_link);
+  };
   return (
     <div id="shorten-link">
       <div className="container">
@@ -45,7 +60,7 @@ const Input = () => {
           <div className="input-control">
             <div className="input">
               <input
-              className={!errorStatus && 'border'}
+                className={!errorStatus ? "border" : null}
                 value={state.inputValue}
                 onChange={(e) =>
                   dispatch({ type: "SET_LINK", payload: e.target.value })
@@ -57,7 +72,7 @@ const Input = () => {
               <button
                 onClick={(e) => {
                   handleShorten();
-                  setStatus(true);
+                  // setStatus(true);
                   {
                     !state.inputValue == ""
                       ? setErrorStatus(true)
@@ -83,27 +98,19 @@ const Input = () => {
       </div>
       <div className="link-list">
         <ul>
-          {state.links.map((el) => {
+          {state.links.map((el, i) => {
             return (
               <li key={uid()}>
                 <div>
                   {console.log(state)}
                   <span>{el.original_link} </span>
                   <span className="short-link">{el.short_link}</span>
-                  {status ? (
-                    <button
-                      className="copy"
-                      onClick={() => {
-                        setStatus(false);
-
-                        navigator.clipboard.writeText(el.short_link);
-                      }}
-                    >
-                      Copy
-                    </button>
-                  ) : (
-                    <button className="copied">Copied!</button>
-                  )}
+                  <button
+                    className={`copy ${state.index === i && "copied"}`}
+                    onClick={() => handleCopy(el, i)}
+                  >
+                    {state.index === i ? "Copied!" : "Copy"}
+                  </button>
                 </div>
               </li>
             );

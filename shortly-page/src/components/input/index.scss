@@ -9,28 +9,31 @@
       // position: relative;
       column-gap: 25px;
       .input-control {
+        background-image: url('../../assets/images/Path 2.png');
+        background-repeat: no-repeat;
         background-color: $primary-color;
-         padding: 50px 65px;
-       .input{
-        @include flex();
-        border-radius: 10px;
-        column-gap: 25px;
-       .border{
-        border: 2px solid red;
-       }
-        input {
-          width: 700px;
+        background-position: right;
+        padding: 50px 65px;
+        .input {
+          @include flex();
           border-radius: 10px;
-          padding: 15px 25px;
-          border: 0;
-          outline: 0;
+          column-gap: 25px;
+          .border {
+            border: 2px solid red;
+          }
+          input {
+            width: 700px;
+            border-radius: 10px;
+            padding: 15px 25px;
+            border: 0;
+            outline: 0;
+          }
+          button {
+            @extend %primary-btn;
+            border-radius: 10px;
+            padding: 15px 20px;
+          }
         }
-        button {
-          @extend %primary-btn;
-          border-radius: 10px;
-          padding: 15px 20px;
-        }
-       }
       }
     }
   }
@@ -57,7 +60,7 @@
           padding: 18px 32px;
           background-color: #ffffff;
           z-index: 4;
-          .short-link{
+          .short-link {
             color: blue;
           }
           .copy {
@@ -66,16 +69,10 @@
             border-radius: 5px;
           }
           .copied {
-            border: 0;
-            outline: 0;
-            border-radius: 28px;
-            font-weight: 700;
-            font-size: 15px;
-            color: white;
-            cursor: pointer;
             background-color: $primary-color;
-            padding: 10px 30px;
-            border-radius: 5px;
+            &:hover {
+              background-color: $primary-color;
+            }
           }
         }
       }
