@@ -14,10 +14,11 @@ const reduser = (state, action) => {
     //   };
     // }
     case "FETCH_SUCCESS": {
-      
       return {
         ...state,
-        links: action.payload,
+        // links: action.payload,
+        // links: [(state.links = action.payload)],
+        links: [...state.links,  action.payload],
         inputValue: "",
       };
     }
@@ -52,6 +53,7 @@ const Input = () => {
             <button
               onClick={(e) => {
                 handleShorten();
+                setStatus(true);
                 // dispatch({
                 //   type: "FETCH_SUCCESS",
                 //   payload: { id: uid(), link: state.inputValue },
@@ -65,17 +67,40 @@ const Input = () => {
       </div>
       <div className="link-list">
         <ul>
-          <li>
+          {/* <li>
             <div>
               {console.log(state)}
-            <span>{state.links.original_link} </span>
-            <span className="short-link">{state.links.short_link}</span>
-            {status ? (
+              <span>{state.links.original_link} </span>
+              <span className="short-link">{state.links.short_link}</span>
+              {status ? (
+                <button
+                  className="copy"
+                  onClick={() => {
+                    setStatus(false);
+                    navigator.clipboard.writeText(state.links.short_link);
+                  }}
+                >
+                  Copy
+                </button>
+              ) : (
+                <button className="copied">Copied!</button>
+              )}
+            </div>
+          </li> */}
+          {state.links.map((el) => {
+            return (
+              <li key={uid()}>
+                <div>
+                  {console.log(state)}
+                  <span>{el.original_link} </span>
+                  <span className="short-link">{el.short_link}</span>
+                  {status ? (
                     <button
                       className="copy"
                       onClick={() => {
                         setStatus(false);
-                        navigator.clipboard.writeText(state.links.short_link);
+
+                        navigator.clipboard.writeText(el.short_link);
                       }}
                     >
                       Copy
@@ -83,8 +108,10 @@ const Input = () => {
                   ) : (
                     <button className="copied">Copied!</button>
                   )}
-            </div>
-          </li>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
