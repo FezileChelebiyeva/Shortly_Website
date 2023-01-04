@@ -9,13 +9,15 @@
       // position: relative;
       column-gap: 25px;
       .input-control {
-        // position: absolute;
-        // top: 1px;
+        background-color: $primary-color;
+         padding: 50px 65px;
+       .input{
         @include flex();
         border-radius: 10px;
         column-gap: 25px;
-        padding: 50px 65px;
-        background-color: $primary-color;
+       .border{
+        border: 2px solid red;
+       }
         input {
           width: 700px;
           border-radius: 10px;
@@ -28,6 +30,7 @@
           border-radius: 10px;
           padding: 15px 20px;
         }
+       }
       }
     }
   }

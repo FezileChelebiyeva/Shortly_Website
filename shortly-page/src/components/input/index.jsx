@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import "./index.scss";
 import { uid } from "uid";
 import axios from "axios";
-const reduser = (state, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case "SET_LINK":
       return { ...state, inputValue: action.payload };
@@ -18,7 +18,7 @@ const reduser = (state, action) => {
         ...state,
         // links: action.payload,
         // links: [(state.links = action.payload)],
-        links: [...state.links,  action.payload],
+        links: [...state.links, action.payload],
         inputValue: "",
       };
     }
@@ -27,8 +27,9 @@ const reduser = (state, action) => {
   }
 };
 const Input = () => {
-  const [state, dispatch] = useReducer(reduser, { links: [], inputValue: "" });
+  const [state, dispatch] = useReducer(reducer, { links: [], inputValue: "" });
   const [status, setStatus] = useState(true);
+  const [errorStatus, setErrorStatus] = useState(true);
 
   const handleShorten = async () => {
     const resp = await axios.get(
@@ -42,51 +43,46 @@ const Input = () => {
       <div className="container">
         <div className="input_btn">
           <div className="input-control">
-            <input
-              value={state.inputValue}
-              onChange={(e) =>
-                dispatch({ type: "SET_LINK", payload: e.target.value })
-              }
-              type="text"
-              placeholder="Shorten a link here..."
-            />
-            <button
-              onClick={(e) => {
-                handleShorten();
-                setStatus(true);
-                // dispatch({
-                //   type: "FETCH_SUCCESS",
-                //   payload: { id: uid(), link: state.inputValue },
-                // });
-              }}
-            >
-              Shorten It!
-            </button>
+            <div className="input">
+              <input
+              className={!errorStatus && 'border'}
+                value={state.inputValue}
+                onChange={(e) =>
+                  dispatch({ type: "SET_LINK", payload: e.target.value })
+                }
+                type="text"
+                placeholder="Shorten a link here..."
+              />
+
+              <button
+                onClick={(e) => {
+                  handleShorten();
+                  setStatus(true);
+                  {
+                    !state.inputValue == ""
+                      ? setErrorStatus(true)
+                      : setErrorStatus(false);
+                  }
+                  // dispatch({
+                  //   type: "FETCH_SUCCESS",
+                  //   payload: { id: uid(), link: state.inputValue },
+                  // });
+                }}
+              >
+                Shorten It!
+              </button>
+            </div>
+
+            {!errorStatus && (
+              <div style={{ color: "red", fontSize: "14px" }}>
+                Please add a link
+              </div>
+            )}
           </div>
         </div>
       </div>
       <div className="link-list">
         <ul>
-          {/* <li>
-            <div>
-              {console.log(state)}
-              <span>{state.links.original_link} </span>
-              <span className="short-link">{state.links.short_link}</span>
-              {status ? (
-                <button
-                  className="copy"
-                  onClick={() => {
-                    setStatus(false);
-                    navigator.clipboard.writeText(state.links.short_link);
-                  }}
-                >
-                  Copy
-                </button>
-              ) : (
-                <button className="copied">Copied!</button>
-              )}
-            </div>
-          </li> */}
           {state.links.map((el) => {
             return (
               <li key={uid()}>
