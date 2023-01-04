@@ -1,22 +1,40 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import "./index.scss";
 import { uid } from "uid";
-
+import axios from "axios";
 const reduser = (state, action) => {
   switch (action.type) {
     case "SET_LINK":
       return { ...state, inputValue: action.payload };
-    case "ADD_LINK": {
+    // case "ADD_LINK": {
+    //   return {
+    //     ...state,
+    //     links: [...state.links, action.payload],
+    //     inputValue: "",
+    //   };
+    // }
+    case "FETCH_SUCCESS": {
+      
       return {
         ...state,
-        links: [...state.links, action.payload],
+        links: action.payload,
         inputValue: "",
       };
     }
+    default:
+      return state;
   }
 };
 const Input = () => {
   const [state, dispatch] = useReducer(reduser, { links: [], inputValue: "" });
+  const [status, setStatus] = useState(true);
+
+  const handleShorten = async () => {
+    const resp = await axios.get(
+      `https://api.shrtco.de/v2/shorten?url=${state.inputValue}`
+    );
+    dispatch({ type: "FETCH_SUCCESS", payload: resp.data.result });
+  };
 
   return (
     <div id="shorten-link">
@@ -32,29 +50,43 @@ const Input = () => {
               placeholder="Shorten a link here..."
             />
             <button
-              onClick={(e) =>
-                dispatch({
-                  type: "ADD_LINK",
-                  payload: { id: uid(), link: state.inputValue },
-                })
-              }
+              onClick={(e) => {
+                handleShorten();
+                // dispatch({
+                //   type: "FETCH_SUCCESS",
+                //   payload: { id: uid(), link: state.inputValue },
+                // });
+              }}
             >
               Shorten It!
             </button>
           </div>
         </div>
       </div>
-        <div className="link-list">
-          <ul>
-            {state.links.map((element) => {
-              return (
-                <li key={element.id}>
-                  <div>{element.link} <button>Copy</button></div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+      <div className="link-list">
+        <ul>
+          <li>
+            <div>
+              {console.log(state)}
+            <span>{state.links.original_link} </span>
+            <span className="short-link">{state.links.short_link}</span>
+            {status ? (
+                    <button
+                      className="copy"
+                      onClick={() => {
+                        setStatus(false);
+                        navigator.clipboard.writeText(state.links.short_link);
+                      }}
+                    >
+                      Copy
+                    </button>
+                  ) : (
+                    <button className="copied">Copied!</button>
+                  )}
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

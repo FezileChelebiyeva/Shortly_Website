@@ -54,8 +54,23 @@
           padding: 18px 32px;
           background-color: #ffffff;
           z-index: 4;
-          button {
+          .short-link{
+            color: blue;
+          }
+          .copy {
             @extend %primary-btn;
+            padding: 10px 30px;
+            border-radius: 5px;
+          }
+          .copied {
+            border: 0;
+            outline: 0;
+            border-radius: 28px;
+            font-weight: 700;
+            font-size: 15px;
+            color: white;
+            cursor: pointer;
+            background-color: $primary-color;
             padding: 10px 30px;
             border-radius: 5px;
           }
