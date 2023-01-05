@@ -6,27 +6,17 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "SET_LINK":
       return { ...state, inputValue: action.payload };
-    // case "ADD_LINK": {
-    //   return {
-    //     ...state,
-    //     links: [...state.links, action.payload],
-    //     inputValue: "",
-    //   };
-    // }
     case "FETCH_SUCCESS":
       return {
         ...state,
-        // links: action.payload,
-        // links: [(state.links = action.payload)],
         links: [...state.links, action.payload],
         inputValue: "",
       };
 
     case "UPDATE_INDEX":
-      console.log(action);
       return {
         ...state,
-        index: action.payload
+        index: action.payload,
       };
 
     default:
@@ -39,7 +29,6 @@ const Input = () => {
     inputValue: "",
     index: null,
   });
-  // const [index, setIndex] = useState(null);
   const [errorStatus, setErrorStatus] = useState(true);
 
   const handleShorten = async () => {
@@ -49,7 +38,6 @@ const Input = () => {
     dispatch({ type: "FETCH_SUCCESS", payload: resp.data.result });
   };
   const handleCopy = (el, i) => {
-    // setIndex(i);
     dispatch({ type: "UPDATE_INDEX", payload: i });
     navigator.clipboard.writeText(el.short_link);
   };
@@ -72,16 +60,11 @@ const Input = () => {
               <button
                 onClick={(e) => {
                   handleShorten();
-                  // setStatus(true);
                   {
                     !state.inputValue == ""
                       ? setErrorStatus(true)
                       : setErrorStatus(false);
                   }
-                  // dispatch({
-                  //   type: "FETCH_SUCCESS",
-                  //   payload: { id: uid(), link: state.inputValue },
-                  // });
                 }}
               >
                 Shorten It!
@@ -102,7 +85,6 @@ const Input = () => {
             return (
               <li key={uid()}>
                 <div>
-                  {console.log(state)}
                   <span>{el.original_link} </span>
                   <span className="short-link">{el.short_link}</span>
                   <button

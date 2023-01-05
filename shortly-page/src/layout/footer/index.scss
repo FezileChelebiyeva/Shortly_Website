@@ -17,10 +17,20 @@
       .div {
         display: flex;
         column-gap: 100px;
+        @media only screen and (max-width: 768px) {
+          flex-direction: column;
+          align-items: center;
+          row-gap: 40px;
+        }
         .nav {
           color: white;
           display: flex;
           column-gap: 75px;
+          @media only screen and (max-width: 768px) {
+            flex-direction: column;
+            align-items: center;
+            row-gap: 40px;
+          }
           nav {
             h5 {
               margin-bottom: 25px;
@@ -55,6 +65,11 @@
             }
           }
         }
+      }
+      @media only screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        row-gap: 40px;
       }
     }
   }
